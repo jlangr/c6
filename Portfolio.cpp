@@ -4,23 +4,22 @@
 
 using namespace std;
 
-Portfolio::Portfolio() 
-   : shares_(0) {
-}
-
-// START:Empty
 bool Portfolio::IsEmpty() const { 
-// START_HIGHLIGHT
-   return 0 == shares_; 
-// END_HIGHLIGHT
+   return 0 == holdings_.size(); 
 }
-// END:Empty
 
 void Portfolio::Purchase(const string& symbol, unsigned int shares) {
    if (0 == shares) throw InvalidPurchaseException();
-   shares_ = shares;
+   holdings_[symbol] = shares + Shares(symbol);
+}
+
+void Portfolio::Sell(const std::string& symbol, unsigned int shares) {
+   if (shares > Shares(symbol)) throw InvalidSellException();
+   holdings_[symbol] = Shares(symbol) - shares;
 }
 
 unsigned int Portfolio::Shares(const string& symbol) const {
-   return shares_;
+   auto it = holdings_.find(symbol);
+   if (it == holdings_.end()) return 0;
+   return it->second;
 }
