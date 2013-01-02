@@ -39,5 +39,9 @@ TEST_F(APortfolio, AnswersSharesForPurchasedSymbol) {
 
    ASSERT_THAT(portfolio_.Shares(IBM), Eq(2));
 }
+
+TEST_F(APortfolio, ThrowsOnPurchaseOfZeroShares) {
+   ASSERT_THROW(portfolio_.Purchase(IBM, 0), InvalidPurchaseException);
+}
 // END:const
 

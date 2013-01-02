@@ -1,18 +1,23 @@
 #include "Portfolio.h"
 
+#include <exception>
+
 using namespace std;
 
 Portfolio::Portfolio() 
-   : isEmpty_(true) 
-   , shares_(0) {
+   : shares_(0) {
 }
 
+// START:Empty
 bool Portfolio::IsEmpty() const { 
-   return isEmpty_; 
+// START_HIGHLIGHT
+   return 0 == shares_; 
+// END_HIGHLIGHT
 }
+// END:Empty
 
 void Portfolio::Purchase(const string& symbol, unsigned int shares) {
-   isEmpty_ = false;
+   if (0 == shares) throw InvalidPurchaseException();
    shares_ = shares;
 }
 
