@@ -70,7 +70,9 @@ TEST_F(APortfolio, SharesReflectsAccumulatedPurchasesOfSameSymbol) {
 // START:helper
 
 TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
+// START_HIGHLIGHT
    Purchase(SAMSUNG, 30);
+// END_HIGHLIGHT
    
    portfolio_.Sell(SAMSUNG, 13);
 
