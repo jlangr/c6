@@ -4,7 +4,7 @@
 
 using namespace ::testing;
 using namespace std;
-using boost::gregorian::date;
+using namespace boost::gregorian;
 
 class APortfolio: public Test {
 public:
@@ -66,16 +66,19 @@ TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
    ASSERT_THROW(portfolio_.Sell(SAMSUNG, 1), InvalidSellException);
 }
 
-// START:PurchaseRecord
+// START:defaultedDate
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
-   portfolio_.Purchase(SAMSUNG, 5);
+// START_HIGHLIGHT
+   date dateOfPurchase(2014, Mar, 17);
+   portfolio_.Purchase(SAMSUNG, 5, dateOfPurchase);
+// END_HIGHLIGHT
 
    auto purchases = portfolio_.Purchases(SAMSUNG);
 
    auto purchase = purchases[0];
    ASSERT_THAT(purchase.Shares, Eq(5));
-   ASSERT_THAT(purchase.Date, Eq(Portfolio::FIXED_PURCHASE_DATE));
+   ASSERT_THAT(purchase.Date, Eq(dateOfPurchase));
 }
-// END:PurchaseRecord
+// END:defaultedDate
 
 

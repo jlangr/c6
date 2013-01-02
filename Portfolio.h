@@ -25,22 +25,21 @@ struct PurchaseRecord {
 
 class Portfolio {
 public:
-// START_HIGHLIGHT
    static const boost::gregorian::date FIXED_PURCHASE_DATE;
-// END_HIGHLIGHT
    bool IsEmpty() const;
-   void Purchase(const std::string& symbol, unsigned int shares);
+// START:defaultedDate
+   void Purchase(
+         const std::string& symbol, 
+         unsigned int shares,
+         boost::gregorian::date date=Portfolio::FIXED_PURCHASE_DATE);
+// END:defaultedDate
    void Sell(const std::string& symbol, unsigned int shares);
    unsigned int Shares(const std::string& symbol) const;
-// START_HIGHLIGHT
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
-// END_HIGHLIGHT
 
 private:
    std::unordered_map<std::string, unsigned int> holdings_;
-// START_HIGHLIGHT
    std::vector<PurchaseRecord> purchases_;
-// END_HIGHLIGHT
 };
 // END:PurchaseRecord
 #endif
