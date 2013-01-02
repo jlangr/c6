@@ -6,13 +6,26 @@ using namespace ::testing;
 using namespace std;
 using namespace boost::gregorian;
 
+// START:helper
 class APortfolio: public Test {
 public:
    static const string IBM;
    static const string SAMSUNG;
    Portfolio portfolio_;
-};
+   static const date ArbitraryDate;
 
+// START_HIGHLIGHT
+   void Purchase(
+         const string& symbol, 
+         unsigned int shares,
+         date date=APortfolio::ArbitraryDate) {
+      portfolio_.Purchase(symbol, shares, date);
+   }
+// END_HIGHLIGHT
+};
+// END:helper
+
+const date APortfolio::ArbitraryDate(2014, Sep, 5);
 const string APortfolio::IBM("IBM");
 const string APortfolio::SAMSUNG("SSNLF");
 
@@ -54,23 +67,26 @@ TEST_F(APortfolio, SharesReflectsAccumulatedPurchasesOfSameSymbol) {
    ASSERT_THAT(portfolio_.Shares(IBM), Eq(5 + 15));
 }
 
+// START:helper
 TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
-   portfolio_.Purchase(SAMSUNG, 30);
+   Purchase(SAMSUNG, 30);
    
    portfolio_.Sell(SAMSUNG, 13);
 
    ASSERT_THAT(portfolio_.Shares(SAMSUNG), Eq(30 - 13));
 }
+// END:helper
 
 TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
    ASSERT_THROW(portfolio_.Sell(SAMSUNG, 1), InvalidSellException);
 }
 
-// START:defaultedDate
+// START:helper
+//
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
-// START_HIGHLIGHT
    date dateOfPurchase(2014, Mar, 17);
-   portfolio_.Purchase(SAMSUNG, 5, dateOfPurchase);
+// START_HIGHLIGHT
+   Purchase(SAMSUNG, 5, dateOfPurchase);
 // END_HIGHLIGHT
 
    auto purchases = portfolio_.Purchases(SAMSUNG);
@@ -79,6 +95,6 @@ TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    ASSERT_THAT(purchase.Shares, Eq(5));
    ASSERT_THAT(purchase.Date, Eq(dateOfPurchase));
 }
-// END:defaultedDate
+// END:helper
 
 
