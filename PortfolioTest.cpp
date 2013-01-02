@@ -68,6 +68,7 @@ TEST_F(APortfolio, SharesReflectsAccumulatedPurchasesOfSameSymbol) {
 }
 
 // START:helper
+
 TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
    Purchase(SAMSUNG, 30);
    
@@ -82,7 +83,7 @@ TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
 }
 
 // START:helper
-//
+
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    date dateOfPurchase(2014, Mar, 17);
 // START_HIGHLIGHT
