@@ -78,15 +78,16 @@ TEST_F(APortfolio, SharesReflectsAccumulatedPurchasesOfSameSymbol) {
 TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
    Purchase(SAMSUNG, 30);
    
-   portfolio_.Sell(SAMSUNG, 13);
+   Sell(SAMSUNG, 13);
 
    ASSERT_THAT(portfolio_.Shares(SAMSUNG), Eq(30 - 13));
 }
 
 TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
-   ASSERT_THROW(portfolio_.Sell(SAMSUNG, 1), InvalidSellException);
+   ASSERT_THROW(Sell(SAMSUNG, 1), InvalidSellException);
 }
 
+// START:cleanedTests
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    Purchase(SAMSUNG, 5, ArbitraryDate);
 
@@ -103,4 +104,5 @@ TEST_F(APortfolio, IncludesSalesInPurchaseRecords) {
 
    ASSERT_PURCHASE(sales[1], -5, ArbitraryDate);
 }
+// END:cleanedTests
 
