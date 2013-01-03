@@ -13,9 +13,11 @@ bool Portfolio::IsEmpty() const {
 // START:purchase
 void Portfolio::Purchase(const string& symbol, unsigned int shares, date date) {
    int shareChange = shares;
+// START_HIGHLIGHT
    if (0 == shareChange) throw InvalidPurchaseException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, date));
+// END_HIGHLIGHT
 }
 // END:purchase
 
@@ -23,9 +25,11 @@ void Portfolio::Purchase(const string& symbol, unsigned int shares, date date) {
 void Portfolio::Sell(const std::string& symbol, unsigned int shares, date date) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    int shareChange = shares * -1;
+// START_HIGHLIGHT
    if (0 == shareChange) throw InvalidPurchaseException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, date));
+// END_HIGHLIGHT
 }
 // END:sell
 // END:transactions
