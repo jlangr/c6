@@ -16,6 +16,7 @@ void Portfolio::Purchase(const string& symbol, unsigned int shares, date date) {
    purchases_.push_back(PurchaseRecord(shares, date));
 }
 
+// START:sell
 void Portfolio::Sell(const std::string& symbol, unsigned int shares, date date) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    if (0 == shares) throw InvalidPurchaseException();
@@ -23,6 +24,7 @@ void Portfolio::Sell(const std::string& symbol, unsigned int shares, date date) 
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, date));
 }
+// END:sell
 // END:transactions
 
 unsigned int Portfolio::Shares(const string& symbol) const {
