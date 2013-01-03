@@ -24,7 +24,7 @@ void Portfolio::Sell(const std::string& symbol, unsigned int shares, date date) 
 // END:sell
 
 // START:transact
-void Portfolio::Transact(const string& symbol, unsigned int shareChange, date date) {
+void Portfolio::Transact(const string& symbol, int shareChange, date date) {
    if (0 == shareChange) throw InvalidPurchaseException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, date));
