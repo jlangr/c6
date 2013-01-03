@@ -87,7 +87,6 @@ TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
    ASSERT_THROW(Sell(SAMSUNG, 1), InvalidSellException);
 }
 
-// START:cleanedTests
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    Purchase(SAMSUNG, 5, ArbitraryDate);
 
@@ -104,5 +103,9 @@ TEST_F(APortfolio, IncludesSalesInPurchaseRecords) {
 
    ASSERT_PURCHASE(sales[1], -5, ArbitraryDate);
 }
-// END:cleanedTests
 
+// START:throw
+TEST_F(APortfolio, ThrowsOnSellOfZeroShares) {
+   ASSERT_THROW(Sell(IBM, 0), InvalidPurchaseException);
+}
+// END:throw
