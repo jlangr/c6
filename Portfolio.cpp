@@ -6,7 +6,9 @@ using namespace std;
 using namespace boost::gregorian;
 
 // START:PurchaseRecord
+// START_HIGHLIGHT
 const date Portfolio::FIXED_PURCHASE_DATE(date(2014, Jan, 1));
+// END_HIGHLIGHT
 // END:PurchaseRecord
 
 bool Portfolio::IsEmpty() const { 
