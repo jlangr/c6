@@ -23,9 +23,11 @@ void Portfolio::Purchase(const string& symbol, unsigned int shares, date date) {
 void Portfolio::Sell(const std::string& symbol, unsigned int shares, date date) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    if (0 == shares) throw InvalidPurchaseException();
+// START_HIGHLIGHT
    int shareChange = shares * -1;
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, date));
+// END_HIGHLIGHT
 }
 // END:sell
 // END:transactions
