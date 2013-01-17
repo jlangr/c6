@@ -29,7 +29,7 @@ void Portfolio::Transact(
 }
 
 void Portfolio::ThrowIfSharesIsZero(int shareChange) const {
-   if (0 == shareChange) throw InvalidPurchaseException();
+   if (0 == shareChange) throw SharesCannotBeZeroException();
 }
 
 void Portfolio::UpdateShares(const string& symbol, int shareChange) {
