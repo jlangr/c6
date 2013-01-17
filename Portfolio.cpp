@@ -26,7 +26,7 @@ void Portfolio::Purchase(const string& symbol, unsigned int shares) {
 }
 // END:PurchaseRecord
 
-void Portfolio::Sell(const std::string& symbol, unsigned int shares) {
+void Portfolio::Sell(const string& symbol, unsigned int shares) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    holdings_[symbol] = Shares(symbol) - shares;
 }
@@ -39,7 +39,7 @@ unsigned int Portfolio::Shares(const string& symbol) const {
 
 // START:PurchaseRecord
 //
-std::vector<PurchaseRecord> Portfolio::Purchases(const std::string& symbol) const {
+vector<PurchaseRecord> Portfolio::Purchases(const string& symbol) const {
    return purchases_;
 }
 // END:PurchaseRecord
