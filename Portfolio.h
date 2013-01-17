@@ -14,9 +14,15 @@ class InvalidSellException: public std::exception {
 };
 
 struct PurchaseRecord {
-   PurchaseRecord(int shares, boost::gregorian::date date) 
+   PurchaseRecord(int shares, const boost::gregorian::date& date) 
    : Shares(shares) 
    , Date(date) {
+   }
+   bool operator==(const PurchaseRecord& rhs) const {
+      return Shares == rhs.Shares && Date == rhs.Date;
+   }
+   bool operator!=(const PurchaseRecord& rhs) const {
+      return !operator==(rhs);
    }
    int Shares;
    boost::gregorian::date Date;

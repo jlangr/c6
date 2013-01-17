@@ -20,7 +20,6 @@ void Portfolio::Sell(
    Transact(symbol, -shares, transactionDate);
 }
 
-// START:Transact
 void Portfolio::Transact(
       const string& symbol, int shareChange, const date& transactionDate) {
    ThrowIfSharesIsZero(shareChange);
@@ -39,7 +38,6 @@ void Portfolio::UpdateShares(const string& symbol, int shareChange) {
 void Portfolio::AddPurchaseRecord(int shareChange, const date& date) {
    purchases_.push_back(PurchaseRecord(shareChange, date));
 }
-// END:Transact
 
 unsigned int Portfolio::Shares(const string& symbol) const {
    auto it = holdings_.find(symbol);

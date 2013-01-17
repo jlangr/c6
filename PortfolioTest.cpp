@@ -6,24 +6,29 @@ using namespace ::testing;
 using namespace std;
 using namespace boost::gregorian;
 
+static const date ArbitraryDate(2014, Sep, 5);
+
+class APurchaseRecord: public Test {
+public:
+};
+
 class APortfolio: public Test {
 public:
    static const string IBM;
    static const string SAMSUNG;
    Portfolio portfolio_;
-   static const date ArbitraryDate;
 
    void Purchase(
          const string& symbol, 
          unsigned int shares,
-         const date& transactionDate=APortfolio::ArbitraryDate) {
+         const date& transactionDate=ArbitraryDate) {
       portfolio_.Purchase(symbol, shares, transactionDate);
    }
 
    void Sell(
          const string& symbol, 
          unsigned int shares,
-         const date& transactionDate=APortfolio::ArbitraryDate) {
+         const date& transactionDate=ArbitraryDate) {
       portfolio_.Sell(symbol, shares, transactionDate);
    }
 
@@ -34,7 +39,6 @@ public:
    }
 };
 
-const date APortfolio::ArbitraryDate(2014, Sep, 5);
 const string APortfolio::IBM("IBM");
 const string APortfolio::SAMSUNG("SSNLF");
 
@@ -105,8 +109,38 @@ TEST_F(APortfolio, IncludesSalesInPurchaseRecords) {
    ASSERT_PURCHASE(sales[1], -5, ArbitraryDate);
 }
 
-// START:throw
 TEST_F(APortfolio, ThrowsOnSellOfZeroShares) {
    ASSERT_THROW(Sell(IBM, 0), SharesCannotBeZeroException);
 }
-// END:throw
+
+TEST_F(APurchaseRecord, IsEqualToAnotherWhenSharesAndDateMatch) {
+   PurchaseRecord a(10, ArbitraryDate);
+   PurchaseRecord b(10, ArbitraryDate);
+
+   ASSERT_THAT(a == b, Eq(true));
+}
+
+TEST_F(APurchaseRecord, IsUnequalWhenSharesDoNotMatch) {
+   PurchaseRecord a(10, ArbitraryDate);
+   PurchaseRecord b(a.Shares + 1, ArbitraryDate);
+
+   ASSERT_THAT(a != b, Eq(true));
+}
+
+TEST_F(APurchaseRecord, IsUnequalWhenDatesDoNotMatch) {
+   PurchaseRecord a(10, ArbitraryDate);
+   PurchaseRecord b(10, ArbitraryDate + date_duration(1));
+
+   ASSERT_THAT(a != b, Eq(true));
+}
+
+TEST_F(APortfolio, SeparatesPurchaseRecordsBySymbol) {
+   Purchase(SAMSUNG, 5, ArbitraryDate);
+   Purchase(IBM, 1, ArbitraryDate);
+
+   auto sales = portfolio_.Purchases(SAMSUNG);
+
+   vector<PurchaseRecord> expected { PurchaseRecord(5, ArbitraryDate) };
+
+   ASSERT_THAT(sales, Eq(expected));
+}
