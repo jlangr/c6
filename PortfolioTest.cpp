@@ -57,9 +57,12 @@ TEST_F(APortfolio, AnswersSharesForPurchasedSymbol) {
    ASSERT_THAT(portfolio_.Shares(IBM), Eq(2));
 }
 
+// START:throw
 TEST_F(APortfolio, ThrowsOnPurchaseOfZeroShares) {
    ASSERT_THROW(Purchase(IBM, 0), SharesCannotBeZeroException);
 }
+// ...
+// END:throw
 
 TEST_F(APortfolio, AnswersSharesForAppropriateSymbol) {
    Purchase(IBM, 5);
