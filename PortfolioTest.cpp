@@ -58,7 +58,7 @@ TEST_F(APortfolio, AnswersSharesForPurchasedSymbol) {
 }
 
 TEST_F(APortfolio, ThrowsOnPurchaseOfZeroShares) {
-   ASSERT_THROW(Purchase(IBM, 0), InvalidPurchaseException);
+   ASSERT_THROW(Purchase(IBM, 0), SharesCannotBeZeroException);
 }
 
 TEST_F(APortfolio, AnswersSharesForAppropriateSymbol) {
@@ -106,6 +106,6 @@ TEST_F(APortfolio, IncludesSalesInPurchaseRecords) {
 
 // START:throw
 TEST_F(APortfolio, ThrowsOnSellOfZeroShares) {
-   ASSERT_THROW(Sell(IBM, 0), InvalidPurchaseException);
+   ASSERT_THROW(Sell(IBM, 0), SharesCannotBeZeroException);
 }
 // END:throw

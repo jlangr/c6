@@ -15,7 +15,7 @@ void Portfolio::Purchase(
       const string& symbol, unsigned int shares, const date& transactionDate) {
    int shareChange = shares;
 // START_HIGHLIGHT
-   if (0 == shareChange) throw InvalidPurchaseException();
+   if (0 == shareChange) throw SharesCannotBeZeroException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, transactionDate));
 // END_HIGHLIGHT
@@ -28,7 +28,7 @@ void Portfolio::Sell(
    if (shares > Shares(symbol)) throw InvalidSellException();
    int shareChange = -shares;
 // START_HIGHLIGHT
-   if (0 == shareChange) throw InvalidPurchaseException();
+   if (0 == shareChange) throw SharesCannotBeZeroException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, transactionDate));
 // END_HIGHLIGHT
