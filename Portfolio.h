@@ -31,7 +31,7 @@ public:
    void Purchase(
          const std::string& symbol, 
          unsigned int shares,
-         boost::gregorian::date date=Portfolio::FIXED_PURCHASE_DATE);
+         boost::gregorian::date transactionDate=Portfolio::FIXED_PURCHASE_DATE);
 // END:defaultedDate
    void Sell(const std::string& symbol, unsigned int shares);
    unsigned int Shares(const std::string& symbol) const;
