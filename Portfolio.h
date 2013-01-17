@@ -28,10 +28,10 @@ public:
    void Purchase(
          const std::string& symbol, 
          unsigned int shares,
-         boost::gregorian::date date);
+         boost::gregorian::date transactionDate);
    void Sell(const std::string& symbol, 
          unsigned int shares,
-         boost::gregorian::date date);
+         boost::gregorian::date transactionDate);
    unsigned int Shares(const std::string& symbol) const;
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
 
