@@ -16,15 +16,15 @@ public:
    void Purchase(
          const string& symbol, 
          unsigned int shares,
-         date date=APortfolio::ArbitraryDate) {
-      portfolio_.Purchase(symbol, shares, date);
+         const date& transactionDate=APortfolio::ArbitraryDate) {
+      portfolio_.Purchase(symbol, shares, transactionDate);
    }
 
    void Sell(
          const string& symbol, 
          unsigned int shares,
-         date date=APortfolio::ArbitraryDate) {
-      portfolio_.Sell(symbol, shares, date);
+         const date& transactionDate=APortfolio::ArbitraryDate) {
+      portfolio_.Sell(symbol, shares, transactionDate);
    }
 
    void ASSERT_PURCHASE(PurchaseRecord& purchase, unsigned int shares, date date) {
