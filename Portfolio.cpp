@@ -20,7 +20,9 @@ void Portfolio::Purchase(
 // START:newname
 void Portfolio::Sell(
       const string& symbol, unsigned int shares, const date& transactionDate) {
+// START_HIGHLIGHT
    if (shares > Shares(symbol)) throw InsufficientSharesException();
+// END_HIGHLIGHT
    Transact(symbol, -shares, transactionDate);
 }
 // END:newname

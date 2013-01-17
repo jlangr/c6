@@ -85,7 +85,9 @@ TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
 
 // START:newname
 TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
+// START_HIGHLIGHT
    ASSERT_THROW(Sell(SAMSUNG, 1), InsufficientSharesException);
+// END_HIGHLIGHT
 }
 // END:newname
 
