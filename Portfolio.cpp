@@ -21,7 +21,7 @@ void Portfolio::Sell(
       const string& symbol, unsigned int shares, date transactionDate) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    holdings_[symbol] = Shares(symbol) - shares;
-   purchases_.push_back(PurchaseRecord(shares * -1, transactionDate));
+   purchases_.push_back(PurchaseRecord(-shares, transactionDate));
 }
 // END:transactions
 
