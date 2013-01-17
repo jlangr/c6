@@ -16,7 +16,7 @@ bool Portfolio::IsEmpty() const {
 // START:defaultedDate
 // START_HIGHLIGHT
 void Portfolio::Purchase(
-      const string& symbol, unsigned int shares, date transactionDate) {
+      const string& symbol, unsigned int shares, const date& transactionDate) {
 // END_HIGHLIGHT
    if (0 == shares) throw InvalidPurchaseException();
    holdings_[symbol] = shares + Shares(symbol);
