@@ -27,7 +27,8 @@ public:
       portfolio_.Sell(symbol, shares, transactionDate);
    }
 
-   void ASSERT_PURCHASE(PurchaseRecord& purchase, unsigned int shares, const date& transactionDate) {
+   void ASSERT_PURCHASE(
+         PurchaseRecord& purchase, unsigned int shares, const date& transactionDate) {
       ASSERT_THAT(purchase.Shares, Eq(shares));
       ASSERT_THAT(purchase.Date, Eq(transactionDate));
    }
