@@ -28,7 +28,7 @@ void Portfolio::Sell(
 // START:transact
 void Portfolio::Transact(
       const string& symbol, int shareChange, const date& transactionDate) {
-   if (0 == shareChange) throw InvalidPurchaseException();
+   if (0 == shareChange) throw SharesCannotBeZeroException();
    holdings_[symbol] = Shares(symbol) + shareChange;
    purchases_.push_back(PurchaseRecord(shareChange, transactionDate));
 }

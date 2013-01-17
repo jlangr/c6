@@ -7,7 +7,7 @@
 #include <vector>
 #include "boost/date_time/gregorian/gregorian_types.hpp"
 
-class InvalidPurchaseException: public std::exception {
+class SharesCannotBeZeroException: public std::exception {
 };
 
 class InvalidSellException: public std::exception {
