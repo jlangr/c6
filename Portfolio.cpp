@@ -5,7 +5,7 @@
 using namespace std;
 
 Portfolio::Portfolio() 
-   : shares_(0) {
+   : shares_{0} {
 }
 
 // START:Empty
