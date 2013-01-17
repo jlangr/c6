@@ -16,8 +16,8 @@ public:
    void Purchase(
          const string& symbol, 
          unsigned int shares,
-         date date=APortfolio::ArbitraryDate) {
-      portfolio_.Purchase(symbol, shares, date);
+         const date& transactionDate=APortfolio::ArbitraryDate) {
+      portfolio_.Purchase(symbol, shares, transactionDate);
    }
 };
 
