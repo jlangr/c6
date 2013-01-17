@@ -17,13 +17,13 @@ void Portfolio::Purchase(
 }
 // END:purchase
 
-// START:sell
+// START:newname
 void Portfolio::Sell(
       const string& symbol, unsigned int shares, const date& transactionDate) {
-   if (shares > Shares(symbol)) throw InvalidSellException();
+   if (shares > Shares(symbol)) throw InsufficientSharesException();
    Transact(symbol, -shares, transactionDate);
 }
-// END:sell
+// END:newname
 
 // START:transact
 void Portfolio::Transact(

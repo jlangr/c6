@@ -10,7 +10,7 @@
 class SharesCannotBeZeroException: public std::exception {
 };
 
-class InvalidSellException: public std::exception {
+class InsufficientSharesException: public std::exception {
 };
 
 struct PurchaseRecord {

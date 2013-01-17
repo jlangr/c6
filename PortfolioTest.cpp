@@ -83,9 +83,11 @@ TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
    ASSERT_THAT(portfolio_.Shares(SAMSUNG), Eq(30 - 13));
 }
 
+// START:newname
 TEST_F(APortfolio, ThrowsWhenSellingMoreSharesThanPurchased) {
-   ASSERT_THROW(Sell(SAMSUNG, 1), InvalidSellException);
+   ASSERT_THROW(Sell(SAMSUNG, 1), InsufficientSharesException);
 }
+// END:newname
 
 TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    Purchase(SAMSUNG, 5, ArbitraryDate);
