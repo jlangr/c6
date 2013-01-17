@@ -14,7 +14,7 @@ class SharesCannotBeZeroException: public std::exception {
 };
 
 struct PurchaseRecord {
-   PurchaseRecord(int shares, boost::gregorian::date date) 
+   PurchaseRecord(int shares, const boost::gregorian::date& date) 
    : Shares(shares) 
    , Date(date) {
    }
