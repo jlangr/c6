@@ -3,8 +3,8 @@
 using namespace std;
 
 Portfolio::Portfolio() 
-   : isEmpty_(true) 
-   , shares_(0) {
+   : isEmpty_{true} 
+   , shares_{0} {
 }
 
 bool Portfolio::IsEmpty() const { 
