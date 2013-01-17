@@ -28,19 +28,19 @@ public:
    void Purchase(
          const std::string& symbol, 
          unsigned int shares,
-         boost::gregorian::date transactionDate);
+         const boost::gregorian::date& transactionDate);
    void Sell(const std::string& symbol, 
          unsigned int shares,
-         boost::gregorian::date transactionDate);
+         const boost::gregorian::date& transactionDate);
    unsigned int Shares(const std::string& symbol) const;
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
 
 private:
    void Transact(const std::string& symbol, 
          int shareChange,
-         boost::gregorian::date);
+         const boost::gregorian::date&);
    void UpdateShares(const std::string& symbol, int shareChange);
-   void AddPurchaseRecord(int, boost::gregorian::date);
+   void AddPurchaseRecord(int, const boost::gregorian::date&);
    void ThrowIfSharesIsZero(int shareChange) const;
 
    std::unordered_map<std::string, unsigned int> holdings_;

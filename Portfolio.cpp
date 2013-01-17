@@ -10,19 +10,19 @@ bool Portfolio::IsEmpty() const {
 }
 
 void Portfolio::Purchase(
-      const string& symbol, unsigned int shares, date transactionDate) {
+      const string& symbol, unsigned int shares, const date& transactionDate) {
    Transact(symbol, shares, transactionDate);
 }
 
 void Portfolio::Sell(
-      const string& symbol, unsigned int shares, date transactionDate) {
+      const string& symbol, unsigned int shares, const date& transactionDate) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    Transact(symbol, -shares, transactionDate);
 }
 
 // START:Transact
 void Portfolio::Transact(
-      const string& symbol, int shareChange, date transactionDate) {
+      const string& symbol, int shareChange, const date& transactionDate) {
    ThrowIfSharesIsZero(shareChange);
    UpdateShares(symbol, shareChange);
    AddPurchaseRecord(shareChange, transactionDate);
@@ -36,7 +36,7 @@ void Portfolio::UpdateShares(const string& symbol, int shareChange) {
    holdings_[symbol] = Shares(symbol) + shareChange;
 }
 
-void Portfolio::AddPurchaseRecord(int shareChange, date date) {
+void Portfolio::AddPurchaseRecord(int shareChange, const date& date) {
    purchases_.push_back(PurchaseRecord(shareChange, date));
 }
 // END:Transact
