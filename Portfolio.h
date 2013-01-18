@@ -7,6 +7,7 @@
 #include <vector>
 #include "boost/date_time/gregorian/gregorian_types.hpp"
 #include "PurchaseRecord.h"
+#include "Holding.h"
 
 class SharesCannotBeZeroException: public std::exception {
 };
@@ -46,6 +47,14 @@ private:
       return it == map.end() ? T{} : it->second;
    }
 
+// START:r7
+   // no longer needed!
    std::unordered_map<std::string, std::vector<PurchaseRecord>> purchaseRecords_;
+// END:r7
+// START:r1
+// START_HIGHLIGHT
+   std::unordered_map<std::string, Holding> holdings_;
+// END_HIGHLIGHT
+// END:r1
 };
 #endif
