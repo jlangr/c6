@@ -7,7 +7,8 @@ add_definitions(-std=c++0x)
 
 set(sources 
    main.cpp 
-   PortfolioTest.cpp Portfolio.cpp)
+   PortfolioTest.cpp Portfolio.cpp
+   PurchaseRecord.h)
 add_executable(test ${sources})
 target_link_libraries(test pthread)
 target_link_libraries(test gmock)

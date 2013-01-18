@@ -1,16 +1,12 @@
 #include "gmock/gmock.h"
 #include "Portfolio.h"
+#include "PurchaseRecord.h"
 #include "boost/date_time/gregorian/gregorian_types.hpp"
+#include "DateTestConstants.h"
 
 using namespace ::testing;
 using namespace std;
 using namespace boost::gregorian;
-
-static const date ArbitraryDate(2014, Sep, 5);
-
-class APurchaseRecord: public Test {
-public:
-};
 
 class APortfolio: public Test {
 public:
@@ -113,25 +109,9 @@ TEST_F(APortfolio, ThrowsOnSellOfZeroShares) {
    ASSERT_THROW(Sell(IBM, 0), SharesCannotBeZeroException);
 }
 
-TEST_F(APurchaseRecord, IsEqualToAnotherWhenSharesAndDateMatch) {
-   PurchaseRecord a(10, ArbitraryDate);
-   PurchaseRecord b(10, ArbitraryDate);
-
-   ASSERT_THAT(a == b, Eq(true));
-}
-
-TEST_F(APurchaseRecord, IsUnequalWhenSharesDoNotMatch) {
-   PurchaseRecord a(10, ArbitraryDate);
-   PurchaseRecord b(a.Shares + 1, ArbitraryDate);
-
-   ASSERT_THAT(a != b, Eq(true));
-}
-
-TEST_F(APurchaseRecord, IsUnequalWhenDatesDoNotMatch) {
-   PurchaseRecord a(10, ArbitraryDate);
-   PurchaseRecord b(10, ArbitraryDate + date_duration(1));
-
-   ASSERT_THAT(a != b, Eq(true));
+// START:multipleSymbols
+bool operator==(const PurchaseRecord& lhs, const PurchaseRecord& rhs) {
+   return lhs.Shares == rhs.Shares && lhs.Date == rhs.Date;
 }
 
 TEST_F(APortfolio, SeparatesPurchaseRecordsBySymbol) {
@@ -140,7 +120,7 @@ TEST_F(APortfolio, SeparatesPurchaseRecordsBySymbol) {
 
    auto sales = portfolio_.Purchases(SAMSUNG);
 
-   vector<PurchaseRecord> expected { PurchaseRecord(5, ArbitraryDate) };
-
-   ASSERT_THAT(sales, Eq(expected));
+   ASSERT_THAT(sales, ElementsAre(PurchaseRecord(5, ArbitraryDate)));
 }
+// END:multipleSymbols
+

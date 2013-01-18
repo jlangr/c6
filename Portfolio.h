@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>
 #include "boost/date_time/gregorian/gregorian_types.hpp"
+#include "PurchaseRecord.h"
 
 class SharesCannotBeZeroException: public std::exception {
 };
@@ -13,21 +14,8 @@ class SharesCannotBeZeroException: public std::exception {
 class InvalidSellException: public std::exception {
 };
 
-struct PurchaseRecord {
-   PurchaseRecord(int shares, const boost::gregorian::date& date) 
-   : Shares(shares) 
-   , Date(date) {
-   }
-   bool operator==(const PurchaseRecord& rhs) const {
-      return Shares == rhs.Shares && Date == rhs.Date;
-   }
-   bool operator!=(const PurchaseRecord& rhs) const {
-      return !operator==(rhs);
-   }
-   int Shares;
-   boost::gregorian::date Date;
-};
 
+// START:multipleSymbols
 class Portfolio {
 public:
    bool IsEmpty() const;
@@ -46,10 +34,17 @@ private:
          int shareChange,
          const boost::gregorian::date&);
    void UpdateShares(const std::string& symbol, int shareChange);
-   void AddPurchaseRecord(int, const boost::gregorian::date&);
+// START_HIGHLIGHT
+   void AddPurchaseRecord(
+         const std::string& symbol, int shares, const boost::gregorian::date&);
+// END_HIGHLIGHT
    void ThrowIfSharesIsZero(int shareChange) const;
 
    std::unordered_map<std::string, unsigned int> holdings_;
    std::vector<PurchaseRecord> purchases_;
+// START_HIGHLIGHT
+   std::unordered_map<std::string, std::vector<PurchaseRecord>> purchaseRecords_;
+// END_HIGHLIGHT
 };
+// END:multipleSymbols
 #endif
