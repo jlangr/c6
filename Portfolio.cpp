@@ -6,9 +6,13 @@
 using namespace std;
 using namespace boost::gregorian;
 
+// START:refactor
 bool Portfolio::IsEmpty() const { 
-   return 0 == holdings_.size(); 
+// START_HIGHLIGHT
+   return 0 == purchaseRecords_.size(); 
+// END_HIGHLIGHT
 }
+// END:refactor
 
 void Portfolio::Purchase(
       const string& symbol, unsigned int shares, const date& transactionDate) {
@@ -21,19 +25,16 @@ void Portfolio::Sell(
    Transact(symbol, -shares, transactionDate);
 }
 
+// START:refactor
 void Portfolio::Transact(
       const string& symbol, int shareChange, const date& transactionDate) {
    ThrowIfSharesIsZero(shareChange);
-   UpdateShares(symbol, shareChange);
    AddPurchaseRecord(symbol, shareChange, transactionDate);
 }
+// END:refactor
 
 void Portfolio::ThrowIfSharesIsZero(int shareChange) const {
    if (0 == shareChange) throw SharesCannotBeZeroException();
-}
-
-void Portfolio::UpdateShares(const string& symbol, int shareChange) {
-   holdings_[symbol] = Shares(symbol) + shareChange;
 }
 
 void Portfolio::AddPurchaseRecord(
@@ -56,9 +57,13 @@ bool Portfolio::ContainsSymbol(const string& symbol) const {
    return purchaseRecords_.find(symbol) != purchaseRecords_.end();
 }
 
+// START:calculate
 unsigned int Portfolio::Shares(const string& symbol) const {
-   return Find<unsigned int>(holdings_, symbol);
+   auto records = Find<vector<PurchaseRecord>>(purchaseRecords_, symbol);
+   return accumulate(records.begin(), records.end(), 0, 
+      [] (int total, PurchaseRecord record) { return total + record.Shares; });
 }
+// END:calculate
 
 vector<PurchaseRecord> Portfolio::Purchases(const string& symbol) const {
    return Find<vector<PurchaseRecord>>(purchaseRecords_, symbol);
