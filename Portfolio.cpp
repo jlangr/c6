@@ -57,14 +57,10 @@ bool Portfolio::ContainsSymbol(const string& symbol) const {
 }
 
 unsigned int Portfolio::Shares(const string& symbol) const {
-   auto it = holdings_.find(symbol);
-   if (it == holdings_.end()) return 0;
-   return it->second;
+   return Find<unsigned int>(holdings_, symbol);
 }
 
 vector<PurchaseRecord> Portfolio::Purchases(const string& symbol) const {
-   auto it = purchaseRecords_.find(symbol);
-   if (it == purchaseRecords_.end()) return vector<PurchaseRecord>();
-   return it->second;
+   return Find<vector<PurchaseRecord>>(purchaseRecords_, symbol);
 }
 
