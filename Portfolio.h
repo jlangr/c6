@@ -14,8 +14,6 @@ class SharesCannotBeZeroException: public std::exception {
 class InvalidSellException: public std::exception {
 };
 
-
-// START:multipleSymbols
 class Portfolio {
 public:
    bool IsEmpty() const;
@@ -34,17 +32,15 @@ private:
          int shareChange,
          const boost::gregorian::date&);
    void UpdateShares(const std::string& symbol, int shareChange);
-// START_HIGHLIGHT
    void AddPurchaseRecord(
          const std::string& symbol, int shares, const boost::gregorian::date&);
-// END_HIGHLIGHT
    void ThrowIfSharesIsZero(int shareChange) const;
 
+   bool ContainsSymbol(const std::string& symbol) const;
+   void InitializePurchaseRecords(const std::string& symbol);
+   void Add(const std::string& symbol, PurchaseRecord&& record);
+
    std::unordered_map<std::string, unsigned int> holdings_;
-   std::vector<PurchaseRecord> purchases_;
-// START_HIGHLIGHT
    std::unordered_map<std::string, std::vector<PurchaseRecord>> purchaseRecords_;
-// END_HIGHLIGHT
 };
-// END:multipleSymbols
 #endif

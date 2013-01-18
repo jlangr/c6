@@ -109,7 +109,6 @@ TEST_F(APortfolio, ThrowsOnSellOfZeroShares) {
    ASSERT_THROW(Sell(IBM, 0), SharesCannotBeZeroException);
 }
 
-// START:multipleSymbols
 bool operator==(const PurchaseRecord& lhs, const PurchaseRecord& rhs) {
    return lhs.Shares == rhs.Shares && lhs.Date == rhs.Date;
 }
@@ -122,5 +121,21 @@ TEST_F(APortfolio, SeparatesPurchaseRecordsBySymbol) {
 
    ASSERT_THAT(sales, ElementsAre(PurchaseRecord(5, ArbitraryDate)));
 }
-// END:multipleSymbols
 
+// START:symbolNotFound
+TEST_F(APortfolio, AnswersEmptyPurchaseRecordVectorWhenSymbolNotFound) {
+   ASSERT_THAT(portfolio_.Purchases(SAMSUNG), Eq(vector<PurchaseRecord>()));
+}
+// END:symbolNotFound
+
+TEST_F(APortfolio, SupportsMultiplePurchaseRecordsOfSymbol) {
+   Purchase(SAMSUNG, 4, ArbitraryDate);
+   Purchase(SAMSUNG, 11, ArbitraryDate);
+
+   auto sales = portfolio_.Purchases(SAMSUNG);
+
+   ASSERT_THAT(sales, ElementsAre(
+            PurchaseRecord(4, ArbitraryDate),
+            PurchaseRecord(11, ArbitraryDate)
+            ));
+}
