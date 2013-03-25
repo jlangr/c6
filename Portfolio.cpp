@@ -1,6 +1,4 @@
 #include "Portfolio.h"
-
-#include <exception>
 #include "PurchaseRecord.h"
 
 using namespace std;
