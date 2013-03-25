@@ -15,11 +15,11 @@ class InvalidSellException: public std::exception {
 
 // START:PurchaseRecord
 struct PurchaseRecord {
-   PurchaseRecord(int shares, const boost::gregorian::date& date) 
+   PurchaseRecord(unsigned int shares, const boost::gregorian::date& date) 
    : Shares(shares) 
    , Date(date) {
    }
-   int Shares;
+   unsigned int Shares;
    boost::gregorian::date Date;
 };
 
