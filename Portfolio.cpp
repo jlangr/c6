@@ -1,7 +1,5 @@
 #include "Portfolio.h"
 
-#include <exception>
-
 using namespace std;
 
 bool Portfolio::IsEmpty() const { 
