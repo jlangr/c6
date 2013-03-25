@@ -31,7 +31,7 @@ public:
    void Sell(const std::string& symbol, 
          unsigned int shares,
          const boost::gregorian::date& transactionDate);
-   int Shares(const std::string& symbol) const;
+   unsigned int Shares(const std::string& symbol) const;
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
 
 private:

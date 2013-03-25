@@ -25,7 +25,7 @@ void Portfolio::Sell(
 }
 // END:transactions
 
-int Portfolio::Shares(const string& symbol) const {
+unsigned int Portfolio::Shares(const string& symbol) const {
    auto it = holdings_.find(symbol);
    if (it == holdings_.end()) return 0;
    return it->second;
