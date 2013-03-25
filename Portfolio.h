@@ -15,9 +15,8 @@ class InvalidSellException: public std::exception {
 
 struct PurchaseRecord {
    PurchaseRecord(int shares, const boost::gregorian::date& date) 
-   : Shares(shares) 
-   , Date(date) {
-   }
+      : Shares(shares) 
+      , Date(date) {}
    int Shares;
    boost::gregorian::date Date;
 };
@@ -32,7 +31,7 @@ public:
    void Sell(const std::string& symbol, 
          unsigned int shares,
          const boost::gregorian::date& transactionDate);
-   unsigned int Shares(const std::string& symbol) const;
+   int Shares(const std::string& symbol) const;
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
 
 private:

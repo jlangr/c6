@@ -28,7 +28,7 @@ public:
    }
 
    void ASSERT_PURCHASE(
-         PurchaseRecord& purchase, unsigned int shares, const date& date) {
+         PurchaseRecord& purchase, int shares, const date& date) {
       ASSERT_THAT(purchase.Shares, Eq(shares));
       ASSERT_THAT(purchase.Date, Eq(date));
    }
