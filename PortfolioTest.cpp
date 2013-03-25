@@ -27,11 +27,15 @@ public:
       portfolio_.Sell(symbol, shares, transactionDate);
    }
 
+// START:signed
    void ASSERT_PURCHASE(
+// START_HIGHLIGHT
          PurchaseRecord& purchase, int shares, const date& date) {
+// END_HIGHLIGHT
       ASSERT_THAT(purchase.Shares, Eq(shares));
       ASSERT_THAT(purchase.Date, Eq(date));
    }
+// END:signed
 };
 
 const date APortfolio::ArbitraryDate(2014, Sep, 5);

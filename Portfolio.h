@@ -13,13 +13,19 @@ class InvalidPurchaseException: public std::exception {
 class InvalidSellException: public std::exception {
 };
 
+// START:signed
 struct PurchaseRecord {
+// START_HIGHLIGHT
    PurchaseRecord(int shares, const boost::gregorian::date& date) 
+// END_HIGHLIGHT
       : Shares(shares) 
       , Date(date) {}
+// START_HIGHLIGHT
    int Shares;
+// END_HIGHLIGHT
    boost::gregorian::date Date;
 };
+// END:signed
 
 class Portfolio {
 public:
@@ -39,3 +45,4 @@ private:
    std::vector<PurchaseRecord> purchases_;
 };
 #endif
+
