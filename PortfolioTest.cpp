@@ -30,14 +30,14 @@ TEST_F(APortfolio, IsNotEmptyAfterPurchase) {
 // ...
 // END:const
 TEST_F(APortfolio, AnswersZeroForSharesOfUnpurchasedSymbol) {
-   ASSERT_THAT(portfolio_.Shares("AAPL"), Eq(0));
+   ASSERT_THAT(portfolio_.Shares("AAPL"), Eq(0u));
 }
 
 // START:const
 TEST_F(APortfolio, AnswersSharesForPurchasedSymbol) {
    portfolio_.Purchase(IBM, 2);
 
-   ASSERT_THAT(portfolio_.Shares(IBM), Eq(2));
+   ASSERT_THAT(portfolio_.Shares(IBM), Eq(2u));
 }
 
 TEST_F(APortfolio, ThrowsOnPurchaseOfZeroShares) {
