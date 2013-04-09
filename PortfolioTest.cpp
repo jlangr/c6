@@ -40,13 +40,13 @@ TEST_F(APortfolio, IsNotEmptyAfterPurchase) {
 }
 
 TEST_F(APortfolio, AnswersZeroForSharesOfUnpurchasedSymbol) {
-   ASSERT_THAT(portfolio_.Shares("AAPL"), Eq(0));
+   ASSERT_THAT(portfolio_.Shares("AAPL"), Eq(0u));
 }
 
 TEST_F(APortfolio, AnswersSharesForPurchasedSymbol) {
    portfolio_.Purchase(IBM, 2);
 
-   ASSERT_THAT(portfolio_.Shares(IBM), Eq(2));
+   ASSERT_THAT(portfolio_.Shares(IBM), Eq(2u));
 }
 
 TEST_F(APortfolio, ThrowsOnPurchaseOfZeroShares) {
@@ -57,14 +57,14 @@ TEST_F(APortfolio, AnswersSharesForAppropriateSymbol) {
    portfolio_.Purchase(IBM, 5);
    portfolio_.Purchase(SAMSUNG, 10);
 
-   ASSERT_THAT(portfolio_.Shares(IBM), Eq(5));
+   ASSERT_THAT(portfolio_.Shares(IBM), Eq(5u));
 }
 
 TEST_F(APortfolio, SharesReflectsAccumulatedPurchasesOfSameSymbol) {
    portfolio_.Purchase(IBM, 5);
    portfolio_.Purchase(IBM, 15);
 
-   ASSERT_THAT(portfolio_.Shares(IBM), Eq(5 + 15));
+   ASSERT_THAT(portfolio_.Shares(IBM), Eq(5u + 15));
 }
 
 // START:helper
@@ -76,7 +76,7 @@ TEST_F(APortfolio, ReducesSharesOfSymbolOnSell)  {
    
    portfolio_.Sell(SAMSUNG, 13);
 
-   ASSERT_THAT(portfolio_.Shares(SAMSUNG), Eq(30 - 13));
+   ASSERT_THAT(portfolio_.Shares(SAMSUNG), Eq(30u - 13));
 }
 // END:helper
 
@@ -95,7 +95,7 @@ TEST_F(APortfolio, AnswersThePurchaseRecordForASinglePurchase) {
    auto purchases = portfolio_.Purchases(SAMSUNG);
 
    auto purchase = purchases[0];
-   ASSERT_THAT(purchase.Shares, Eq(5));
+   ASSERT_THAT(purchase.Shares, Eq(5u));
    ASSERT_THAT(purchase.Date, Eq(dateOfPurchase));
 }
 // END:helper
