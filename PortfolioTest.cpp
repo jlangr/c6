@@ -1,11 +1,12 @@
 #include "gmock/gmock.h"
 #include "Portfolio.h"
 #include "PurchaseRecord.h"
-#include "GregorianDate.h"
+#include "boost/date_time/gregorian/gregorian_types.hpp"
 #include "DateTestConstants.h"
 
 using namespace ::testing;
 using namespace std;
+using namespace boost::gregorian;
 
 class APortfolio: public Test {
 public:
@@ -16,19 +17,19 @@ public:
    void Purchase(
          const string& symbol, 
          unsigned int shares,
-         const GregorianDate& transactionDate=ArbitraryDate) {
+         const date& transactionDate=ArbitraryDate) {
       portfolio_.Purchase(symbol, shares, transactionDate);
    }
 
    void Sell(
          const string& symbol, 
          unsigned int shares,
-         const GregorianDate& transactionDate=ArbitraryDate) {
+         const date& transactionDate=ArbitraryDate) {
       portfolio_.Sell(symbol, shares, transactionDate);
    }
 
    void ASSERT_PURCHASE(
-         PurchaseRecord& purchase, int shares, const GregorianDate& transactionDate) {
+         PurchaseRecord& purchase, int shares, const date& transactionDate) {
       ASSERT_THAT(purchase.Shares, Eq(shares));
       ASSERT_THAT(purchase.Date, Eq(transactionDate));
    }

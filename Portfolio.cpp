@@ -2,6 +2,7 @@
 #include "PurchaseRecord.h"
 
 using namespace std;
+using namespace boost::gregorian;
 
 // START:r7
 bool Portfolio::IsEmpty() const { 
@@ -13,19 +14,19 @@ bool Portfolio::IsEmpty() const {
 // END:r7
 
 void Portfolio::Purchase(
-      const string& symbol, unsigned int shares, const GregorianDate& transactionDate) {
+      const string& symbol, unsigned int shares, const date& transactionDate) {
    Transact(symbol, shares, transactionDate);
 }
 
 void Portfolio::Sell(
-      const string& symbol, unsigned int shares, const GregorianDate& transactionDate) {
+      const string& symbol, unsigned int shares, const date& transactionDate) {
    if (shares > Shares(symbol)) throw InvalidSellException();
    Transact(symbol, -shares, transactionDate);
 }
 
 // START:refactor
 void Portfolio::Transact(
-      const string& symbol, int shareChange, const GregorianDate& transactionDate) {
+      const string& symbol, int shareChange, const date& transactionDate) {
    ThrowIfSharesIsZero(shareChange);
    AddPurchaseRecord(symbol, shareChange, transactionDate);
 }
@@ -36,7 +37,7 @@ void Portfolio::ThrowIfSharesIsZero(int shareChange) const {
 }
 
 void Portfolio::AddPurchaseRecord(
-      const string& symbol, int shareChange, const GregorianDate& date) {
+      const string& symbol, int shareChange, const date& date) {
    if (!ContainsSymbol(symbol))
       InitializePurchaseRecords(symbol);
 

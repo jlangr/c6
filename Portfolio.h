@@ -5,7 +5,7 @@
 #include <exception>
 #include <unordered_map>
 #include <vector>
-#include "GregorianDate.h"
+#include "boost/date_time/gregorian/gregorian_types.hpp"
 #include "PurchaseRecord.h"
 #include "Holding.h"
 
@@ -21,20 +21,20 @@ public:
    void Purchase(
          const std::string& symbol, 
          unsigned int shares,
-         const GregorianDate& transactionDate);
+         const boost::gregorian::date& transactionDate);
    void Sell(const std::string& symbol, 
          unsigned int shares,
-         const GregorianDate& transactionDate);
+         const boost::gregorian::date& transactionDate);
    unsigned int Shares(const std::string& symbol) const;
    std::vector<PurchaseRecord> Purchases(const std::string& symbol) const;
 
 private:
    void Transact(const std::string& symbol, 
          int shareChange,
-         const GregorianDate&);
+         const boost::gregorian::date&);
    void UpdateShares(const std::string& symbol, int shareChange);
    void AddPurchaseRecord(
-         const std::string& symbol, int shares, const GregorianDate&);
+         const std::string& symbol, int shares, const boost::gregorian::date&);
    void ThrowIfSharesIsZero(int shareChange) const;
 
    bool ContainsSymbol(const std::string& symbol) const;

@@ -1,7 +1,7 @@
 #ifndef PurchaseRecord_h
 #define PurchaseRecord_h
 
-#include "GregorianDate.h"
+#include "boost/date_time/gregorian/gregorian_types.hpp"
 
 struct PurchaseRecord {
    PurchaseRecord(int shares, const boost::gregorian::date& date)
@@ -9,7 +9,7 @@ struct PurchaseRecord {
       , Date(date) {
    }
    int Shares;
-   GregorianDate Date;
+   boost::gregorian::date Date;
 };
 
 #endif
