@@ -1,8 +1,8 @@
 #ifndef DateTestConstants_h
 #define DateTestConstants_h
 
-#include "boost/date_time/gregorian/gregorian_types.hpp"
+#include "GregorianDate.h"
 
-static const boost::gregorian::date ArbitraryDate(2014, boost::gregorian::Sep, 5);
+static const GregorianDate ArbitraryDate(2014, boost::gregorian::Sep, 5);
 
 #endif
