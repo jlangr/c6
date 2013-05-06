@@ -18,14 +18,14 @@ const string APortfolio::IBM("IBM");
 // ...
 // END:const
 TEST_F(APortfolio, IsEmptyWhenCreated) {
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(true));
+   ASSERT_TRUE(portfolio_.IsEmpty());
 }
 
 // START:const
 TEST_F(APortfolio, IsNotEmptyAfterPurchase) {
    portfolio_.Purchase(IBM, 1);
 
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(false));
+   ASSERT_FALSE(portfolio_.IsEmpty());
 }
 // ...
 // END:const
