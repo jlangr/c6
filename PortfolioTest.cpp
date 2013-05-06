@@ -43,13 +43,13 @@ const string APortfolio::IBM("IBM");
 const string APortfolio::SAMSUNG("SSNLF");
 
 TEST_F(APortfolio, IsEmptyWhenCreated) {
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(true));
+   ASSERT_TRUE(portfolio_.IsEmpty());
 }
 
 TEST_F(APortfolio, IsNotEmptyAfterPurchase) {
    Purchase(IBM, 1);
 
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(false));
+   ASSERT_FALSE(portfolio_.IsEmpty());
 }
 
 TEST_F(APortfolio, AnswersZeroForSharesOfUnpurchasedSymbol) {
