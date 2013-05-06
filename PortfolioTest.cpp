@@ -17,7 +17,7 @@ const string APortfolio::SAMSUNG("SSNLF");
 // START:test
 TEST_F(APortfolio, IsEmptyWhenCreated) {
 // END:test
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(true));
+   ASSERT_TRUE(portfolio_.IsEmpty());
 }
 
 // START:test
@@ -25,7 +25,7 @@ TEST_F(APortfolio, IsNotEmptyAfterPurchase) {
 // END:test
    portfolio_.Purchase(IBM, 1);
 
-   ASSERT_THAT(portfolio_.IsEmpty(), Eq(false));
+   ASSERT_FALSE(portfolio_.IsEmpty());
 }
 
 // START:test
