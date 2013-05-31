@@ -51,14 +51,12 @@ void Portfolio::AddPurchaseRecord(
 // END_HIGHLIGHT
 }
 
-// END:multipleSymbols
 unsigned int Portfolio::Shares(const string& symbol) const {
    auto it = holdings_.find(symbol);
    if (it == holdings_.end()) return 0;
    return it->second;
 }
 
-// START:multipleSymbols
 vector<PurchaseRecord> Portfolio::Purchases(const string& symbol) const {
 // START_HIGHLIGHT
 //   return purchases_;
