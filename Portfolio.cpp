@@ -36,7 +36,7 @@ unsigned int Portfolio::Shares(const string& symbol) const {
 }
 
 // START:PurchaseRecord
-//
+
 vector<PurchaseRecord> Portfolio::Purchases(const string& symbol) const {
    return purchases_;
 }
