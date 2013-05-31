@@ -22,8 +22,8 @@ void Portfolio::Sell(
    if (shares > Shares(symbol)) throw InvalidSellException();
    Transact(symbol, -shares, transactionDate);
 }
-
 // START:refactor
+
 void Portfolio::Transact(
       const string& symbol, int shareChange, const date& transactionDate) {
    ThrowIfSharesIsZero(shareChange);
